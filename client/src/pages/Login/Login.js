@@ -9,7 +9,7 @@ import Auth from "../../utils/auth";
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { error, data }] = useMutation(LOGIN);
+  const [login, { error }] = useMutation(LOGIN);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -45,7 +45,7 @@ const Login = (props) => {
   return (
     <div className="login">
       <Link to="/">
-        <img className="login_logo" src={MojaveLogo} />
+        <img className="login_logo" src={MojaveLogo} alt="Mojave Logo" />
       </Link>
       <div className="login_container">
         <h1> Sign In </h1>
@@ -68,6 +68,12 @@ const Login = (props) => {
             value={formState.password}
             onChange={handleChange}
           />
+          {/* If error, display error, else do not show */}
+          {error ? (
+            <div>
+              <p className="error-text">The provided credentials are incorrect</p>
+            </div>
+          ) : null}
           <button
             className="signIn_button"
             style={{ cursor: "pointer" }}
